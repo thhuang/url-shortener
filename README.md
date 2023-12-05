@@ -18,7 +18,7 @@ Clients for this tool include a Python CLI tool and a standard web browser.
 - Generate a shortened URL.
   - Input: A long URL
   - Output: A shortened URL
-- Generate a URL with customized path.
+- Generate a URL with a customized path.
   - Input: A long URL and a customized string with a maximum length limit of 16 characters
   - Output: A shortened URL with the specific customized path
 - Return the statistics of the usage of the shortened URL.
@@ -39,14 +39,14 @@ The server is hosted on AWS, utilizing Amazon API Gateway and AWS Lambdas, and w
 
   - POST: /shorten
   - body:
-    ```json
+    ```
     {
       shorturlpath: <string> // null or a string with a maximum size of 16 characters
       longurl: <string> // non-empty string with a maximum size of 156 characters
     }
     ```
   - response:
-    ```json
+    ```
     {
       shorturl: <string>
     }
@@ -60,7 +60,7 @@ The server is hosted on AWS, utilizing Amazon API Gateway and AWS Lambdas, and w
 - Get the statistics of the shortened URL.
   - GET: /stats/<shortened-url-path>
   - response:
-    ```json
+    ```
     {
       "usage": <int>,
       "hourStats": {
@@ -96,9 +96,9 @@ A MySQL database with two tables is hosted on Amazon RDS.
 
 #### URLs Table
 
-Stores the mapping from short URL to original long URL.
+Stores the mapping from the short URL to the original long URL.
 
-```sql
+```
 (
     urlid        int not null AUTO_INCREMENT,
     shorturl     varchar(16) not null,
@@ -112,7 +112,7 @@ Stores the mapping from short URL to original long URL.
 
 Stores the request history of the shortened URL.
 
-```sql
+```
 (
     historyid    int not null AUTO_INCREMENT,
     urlid        int not null,
